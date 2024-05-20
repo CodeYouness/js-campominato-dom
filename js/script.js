@@ -30,6 +30,9 @@ playButton.addEventListener('click', function () {
  */
 function generateGrid(max, measures) {
     numberBlacklist = []
+    for (let i = 0; i < 16; i++) {
+        numberBlacklist.push(getUniqueInt(numberBlacklist, 1, max))
+    }
     for (let i = 1; i <= max; i++) {
         const cell = document.createElement('section')
         cell.classList.add(measures)
