@@ -5,10 +5,13 @@
 const selectEl = document.querySelector('select')
 const Grid = document.querySelector('.grid')
 const playButton = document.querySelector('button')
+let numberBlacklist = []
+let gameOver = false
 
 
 playButton.addEventListener('click', function () {
     Grid.innerHTML = '';
+    gameOver = false
     const selectValue = selectEl.value
     if (selectValue === 'easy') {
         generateGrid(100, 'tencell')
@@ -26,6 +29,7 @@ playButton.addEventListener('click', function () {
  * @param {*} measures class for the width and height of every cell 
  */
 function generateGrid(max, measures) {
+    numberBlacklist = []
     for (let i = 1; i <= max; i++) {
         const cell = document.createElement('section')
         cell.classList.add(measures)
@@ -54,4 +58,8 @@ function getUniqueInt(blacklist, min, max) {
     }
 
     return randomNumber;
+}
+
+for (let i = 0; i <= 16; i++) {
+    numberBlacklist += getUniqueInt('', 1, 100);
 }
