@@ -5,14 +5,17 @@
 const selectEl = document.querySelector('select')
 const Grid = document.querySelector('.grid')
 const playButton = document.querySelector('button')
-const score = document.querySelector('#points')
+const scoreShow = document.querySelector('#points')
 let numberBlacklist = []
 let gameOver = false
+let scoreCounter = 0
 
 
 playButton.addEventListener('click', function () {
     Grid.innerHTML = '';
     gameOver = false
+    scoreCounter = 0
+    scoreShow.innerHTML = 0
     const selectValue = selectEl.value
     if (selectValue === 'easy') {
         generateGrid(100, 'tencell')
@@ -44,10 +47,12 @@ function generateGrid(max, measures) {
             if (!gameOver) {
                 if (numberBlacklist.includes(i)) {
                     cell.classList.add('bg_red');
-                    alert('You lose!')
+                    alert('You lose!' + ' Your score is: ' + scoreCounter)
                     gameOver = true;
-                } else {
+                } else if (!cell.classList.contains('bg_blue')) {
                     cell.classList.add('bg_blue');
+                    scoreCounter++
+                    scoreShow.innerHTML = scoreCounter
                 }
             }
         })
