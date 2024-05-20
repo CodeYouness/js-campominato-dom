@@ -5,6 +5,7 @@
 const selectEl = document.querySelector('select')
 const Grid = document.querySelector('.grid')
 const playButton = document.querySelector('button')
+const score = document.querySelector('#points')
 let numberBlacklist = []
 let gameOver = false
 
@@ -33,14 +34,22 @@ function generateGrid(max, measures) {
     for (let i = 0; i < 16; i++) {
         numberBlacklist.push(getUniqueInt(numberBlacklist, 1, max))
     }
+
     for (let i = 1; i <= max; i++) {
         const cell = document.createElement('section')
         cell.classList.add(measures)
         cell.append(i)
         Grid.appendChild(cell)
         cell.addEventListener('click', function () {
-            cell.classList.toggle('bg_blue')
-            console.log(i)
+            if (!gameOver) {
+                if (numberBlacklist.includes(i)) {
+                    cell.classList.add('bg_red');
+                    alert('You lose!')
+                    gameOver = true;
+                } else {
+                    cell.classList.add('bg_blue');
+                }
+            }
         })
     }
 }
@@ -61,8 +70,4 @@ function getUniqueInt(blacklist, min, max) {
     }
 
     return randomNumber;
-}
-
-for (let i = 0; i <= 16; i++) {
-    numberBlacklist += getUniqueInt('', 1, 100);
 }
