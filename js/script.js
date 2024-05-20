@@ -37,3 +37,21 @@ function generateGrid(max, measures) {
         })
     }
 }
+
+function generateNumberInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function getUniqueInt(blacklist, min, max) {
+    let randomNumber;
+    let isFound = false;
+
+    while (!isFound) {
+        randomNumber = generateNumberInt(min, max);
+        if (!blacklist.includes(randomNumber)) {
+            isFound = true;
+        }
+    }
+
+    return randomNumber;
+}
