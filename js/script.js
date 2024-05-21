@@ -1,7 +1,3 @@
-//<section class="tencell"></section>
-//<section class="ninecell"></section>
-//<section class="eightcell"></section>
-
 const selectEl = document.querySelector('select')
 const Grid = document.querySelector('.grid')
 const playButton = document.querySelector('button')
@@ -37,16 +33,23 @@ function generateGrid(max, measures) {
     for (let i = 0; i < 16; i++) {
         numberBlacklist.push(getUniqueInt(numberBlacklist, 1, max))
     }
-
+    const domEl = []
     for (let i = 1; i <= max; i++) {
         const cell = document.createElement('section')
+
         cell.classList.add(measures)
         cell.append(i)
         Grid.appendChild(cell)
+        if (numberBlacklist.includes(i)) {
+            domEl.push(cell)
+            console.log(domEl)
+        }
         cell.addEventListener('click', function () {
             if (!gameOver) {
                 if (numberBlacklist.includes(i)) {
-                    cell.classList.add('bg_red');
+                    for (let k = 0; k < 15; k++) {
+                        domEl[k].classList.add('bg_red');
+                    }
                     alert('You lose!' + ' Your score is: ' + scoreCounter)
                     gameOver = true;
                 } else if (!cell.classList.contains('bg_blue')) {
