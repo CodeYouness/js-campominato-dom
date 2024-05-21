@@ -42,7 +42,6 @@ function generateGrid(max, measures) {
         Grid.appendChild(cell)
         if (numberBlacklist.includes(i)) {
             domEl.push(cell)
-            console.log(domEl)
         }
         cell.addEventListener('click', function () {
             if (!gameOver) {
